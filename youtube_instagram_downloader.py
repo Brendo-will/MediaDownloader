@@ -4,19 +4,26 @@ from pathlib import Path
 from os import startfile, remove
 from pywebio.input import input, select
 from pywebio.output import put_text, clear
+import re
+
+def sanitize_filename(name):
+    # Remove caracteres inválidos do nome do arquivo
+    return re.sub(r'[\\/*?:"<>|]', "", name)
 
 def download_youtube(video_link, download_option, path_to_download):
     video_url = YouTube(video_link)
     
     if download_option in ["Video Completo", "Ambos"]:
         video_stream = video_url.streams.get_highest_resolution()
-        video_file_path = path_to_download / f"{video_url.title} - video.mp4"
+        sanitized_title = sanitize_filename(video_url.title)
+        video_file_path = path_to_download / f"{sanitized_title} - video.mp4"
         video_stream.download(output_path=str(path_to_download), filename=video_file_path.name)
         put_text('Video baixado com sucesso'.title()).style('color:blue;font-size:50px')
         
     if download_option in ["Apenas Áudio", "Ambos"]:
         audio_stream = video_url.streams.filter(only_audio=True).first()
-        audio_file_path = path_to_download / f"{video_url.title} - audio.mp4"
+        sanitized_title = sanitize_filename(video_url.title)
+        audio_file_path = path_to_download / f"{sanitized_title} - audio.mp4"
         audio_stream.download(output_path=str(path_to_download), filename=audio_file_path.name)
         put_text('Áudio baixado com sucesso'.title()).style('color:blue;font-size:50px')
     
