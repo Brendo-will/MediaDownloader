@@ -82,7 +82,7 @@ def main(page: ft.Page):
         if platform == "YouTube":
             download_option_var.visible = True
             page.bgcolor = ft.colors.BLACK  # Fundo preto
-            logo_var.src = "image/Youtube_logo.png"  # Altere para o caminho correto do logo do YouTube
+            logo_var.src = "./Youtube_logo.png"  # Altere para o caminho correto do logo do YouTube
             title_var.value = "YouTube"
             title_var.color = ft.colors.WHITE  # Texto branco
             url_entry.color = ft.colors.WHITE
@@ -92,7 +92,7 @@ def main(page: ft.Page):
         elif platform == "Instagram":
             download_option_var.visible = False
             page.bgcolor = ft.colors.WHITE  # Fundo branco
-            logo_var.src = "image/Instagram_icon.png"  # Altere para o caminho correto do logo do Instagram
+            logo_var.src = "./Instagram_icon.png"  # Altere para o caminho correto do logo do Instagram
             title_var.value = "Instagram"
             title_var.color = ft.colors.BLACK  # Texto preto
             url_entry.color = ft.colors.BLACK
